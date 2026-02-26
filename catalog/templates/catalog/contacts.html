@@ -1,0 +1,139 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact</title>
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
+</head>
+<body>
+<div class="row min-vh-100">
+    <!-- Меню  -->
+    <div class="col-3">
+        <div class="card rounded-0 border-0 d-flex flex-column h-100">
+            <div class="card-header text-bg-dark py-3">
+                <img src="{% static 'images/bootstrap_logo.png' %}" alt="Logo" width="32"
+                     class="img-thumbnail align-middle me-2">
+                <span class="align-middle"><h5 class="mb-0 d-inline">Меню</h5></span>
+            </div>
+
+            <div class="card-body text-bg-dark p-0 flex-grow-1">
+                <ul class="list-unstyled mb-0">
+                    <!-- Главная -->
+                    <li>
+                        <a href="#" class="text-white d-block py-3 px-3 text-decoration-none">
+                            <img src="{% static 'images/bootstrap-icons-1.13.1/house-door-fill.svg' %}"
+                                 width="24" height="24"
+                                 class="align-middle me-2"
+                                 style="filter: brightness(0) invert(1);"
+                                 alt="Главная">
+                            <span class="align-middle">Главная</span>
+                        </a>
+                    </li>
+                    <!-- Категории -->
+                    <li>
+                        <a href="#" class="text-white d-block py-3 px-3 text-decoration-none">
+                            <img src="{% static 'images/bootstrap-icons-1.13.1/speedometer2.svg' %}"
+                                 width="24" height="24"
+                                 class="align-middle me-2"
+                                 style="filter: brightness(0) invert(1);"
+                                 alt="Категории">
+                            <span class="align-middle">Категории</span>
+                        </a>
+                    </li>
+                    <!-- Заказы -->
+                    <li>
+                        <a href="#" class="text-white d-block py-3 px-3 text-decoration-none">
+                            <img src="{% static 'images/bootstrap-icons-1.13.1/calendar-check.svg' %}"
+                                 width="24" height="24"
+                                 class="align-middle me-2"
+                                 style="filter: brightness(0) invert(1);"
+                                 alt="Заказы">
+                            <span class="align-middle">Заказы</span>
+                        </a>
+                    </li>
+                    <!-- Контакты -->
+                    <li>
+                        <a href="#" class="text-white d-block py-3 px-3 text-decoration-none">
+                            <img src="{% static 'images/bootstrap-icons-1.13.1/person-circle.svg' %}"
+                                 width="24" height="24"
+                                 class="align-middle me-2"
+                                 style="filter: brightness(0) invert(1);"
+                                 alt="Контакты">
+                            <span class="align-middle">Контакты</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- футер  -->
+            <div class="card-footer text-bg-dark p-3 mt-auto">
+                <div class="d-flex align-items-center">
+                    <img src="{% static 'images/face.png' %}" class="rounded-circle z-depth-0 me-2" alt="avatar image"
+                         height="35" width="35">
+                    <div class="dropup">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Пользователь
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Профиль</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Выйти</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Правая часть -->
+    <div class="col-9 bg-light p-4">
+        <header class="bg-light text-black text-center py-5">
+            <div class="container">
+                <h1 class="display-4">Контакты</h1>
+            </div>
+        </header>
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-5">
+                <!-- форма-->
+                <form method="post" class="border p-4 rounded">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="nameInput" class="form-label">Имя</label>
+                        <input type="text" class="form-control" id="nameInput" name="name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label">Почта</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">@</span>
+                            <input type="email" class="form-control" id="emailInput" name="email">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="messageTextarea" class="form-label">Сообщение</label>
+                        <textarea class="form-control" id="messageTextarea" rows="5" name="message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+            <!-- контактная инфа -->
+            <div class="col-5">
+                <div class="ps-4">
+                    <h5 class="mb-4">Наши контакты</h5>
+                    <p class="text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
