@@ -16,7 +16,11 @@
 ## Технологии
 
 - Python 3.14+
-- Django 5.0.3
+- Django 6.0.2
+- psycopg2 2.9.11
+- python-dotenv 1.2.2
+- ipython 9.10.0
+- pillow 12.1.1
 - Poetry - управление зависимостями
 - Bootstrap 5 - стилизация
 
