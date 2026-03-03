@@ -18,7 +18,7 @@ class Product(models.Model):
     name = models.CharField(max_length=150, verbose_name='Название продукта')
     descriptions = models.TextField(verbose_name='Описание продукта')
     image = models.ImageField(upload_to='photos/', verbose_name='Изображение')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products')
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='products', verbose_name='Категория')
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Цена')
     created_at = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateField(auto_now=True, verbose_name='Дата последнего изменения')
