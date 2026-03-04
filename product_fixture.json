@@ -1,0 +1,54 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Ноутбук MSI",
+        "descriptions": "Для работы",
+        "image": "photos/msi.jpg",
+        "category": 1,
+        "price": "120000.00",
+        "created_at": "2026-03-03",
+        "updated_at": "2026-03-03"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "Футболка",
+        "descriptions": "Хлопок",
+        "image": "photos/shirt.png",
+        "category": 2,
+        "price": "800.00",
+        "created_at": "2026-03-03",
+        "updated_at": "2026-03-03"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "name": "Преступление и наказание",
+        "descriptions": "Ф.М. Достоевский",
+        "image": "photos/crime.png",
+        "category": 3,
+        "price": "1500.00",
+        "created_at": "2026-03-03",
+        "updated_at": "2026-03-03"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+        "name": "Шорты",
+        "descriptions": "хлопок, черный цвет",
+        "image": "photos/short.png",
+        "category": 2,
+        "price": "300.00",
+        "created_at": "2026-03-03",
+        "updated_at": "2026-03-03"
+    }
+}
+]

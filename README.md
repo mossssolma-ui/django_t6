@@ -16,7 +16,11 @@
 ## Технологии
 
 - Python 3.14+
-- Django 5.0.3
+- Django 6.0.2
+- psycopg2 2.9.11
+- python-dotenv 1.2.2
+- ipython 9.10.0
+- pillow 12.1.1
 - Poetry - управление зависимостями
 - Bootstrap 5 - стилизация
 
@@ -24,10 +28,18 @@
 
 ```
 django-6/
-├── .venv/ # Виртуальное окружение
 ├── catalog/ # Основное приложение
+│ ├── management/ 
+│   ├── commands/
+│   │  ├── __init__.py
+│   │  └── add_products.py # кастомная команда добавления продуктов 
+│   └── __init__.py
+│ 
 │ ├── migrations/ # пакет с миграциями
+│ │ └── 0001_initial.py
+│ │ └── 0002_alter_product_category.py
 │ │ └── __init__.py
+│ │
 │ ├── templates/ # HTML шаблоны
 │ │ └── catalog/
 │ │     ├── home.html # Главная страница
@@ -50,10 +62,20 @@ django-6/
 │ └── wsgi.py
 │ 
 │
-├── static/ # Статические файлы
+├── media/ # Статические медиа файлы
+│ └── photos/ # содержит фото товаров(продуктов)
+│
+── static/ # Статические файлы
 │ ├── css/
 │ ├── js/
 │ └── images/
+│
+├── screenshots/ # Содержит скрины 5 шага
+│
+├── category_fixture.json # фикстура категорий
+├── product_fixture.json # фикстура товаров(продуктов)
+│
+├── .env.sample # переменные окружения
 ├── manage.py # Запуск проекта
 ├── .flake8
 ├── .gitignore
@@ -88,3 +110,5 @@ django-6/
 4. Открыть в браузере:
 [http://127.0.0.1:8000/](http://127.0.0.1:8000/) - главная страница
 [http://127.0.0.1:8000/contacts/](http://127.0.0.1:8000/contacts/) - страница контактов
+
+[http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) - админка
