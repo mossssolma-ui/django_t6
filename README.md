@@ -45,6 +45,7 @@ django-6/
 │ │     ├── base.html # базовый шаблон
 │ │     ├── products_list.html # главная страница с продуктами
 │ │     ├── products_details.html # подробное описание продукта
+│ │     ├── product_add.html # добавление нового продукта
 │ │     └── contacts.html # Страница контактов
 │ │     └── includes/  # подшаблоны
 │ │         ├── inc_menu.html # подшаблон меню 

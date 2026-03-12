@@ -1,0 +1,59 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}Product add{% endblock %}
+
+
+{% block content %}
+<div class="col-9 bg-light p-4">
+    <div class="container">
+        <header class="bg-light text-black text-center py-5">
+            <h1 class="display-4">Добавить новый продукт</h1>
+        </header>
+
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <form method="post" enctype="multipart/form-data" class="border p-4 rounded">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Название продукта *</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="descriptions" class="form-label">Описание</label>
+                        <textarea class="form-control" id="descriptions" name="descriptions" rows="4"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="category.id" class="form-label">Категория *</label>
+                        <select class="form-control" id="category.id" name="category_id" required>
+                            <option value="">Выберите категорию</option>
+                            {% for category in categories %}
+                            <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Цена (₽) *</label>
+                        <input type="number" step="0.01" class="form-control" id="price" name="price" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Изображение товара</label>
+                        <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                        <small class="text-muted">Поддерживаются форматы: JPG, PNG, GIF</small>
+                    </div>
+
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">Добавить продукт</button>
+                        <a href="{% url 'catalog:products_list' %}" class="btn btn-secondary">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
