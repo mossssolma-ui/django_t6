@@ -1,0 +1,23 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load my_tags %}
+
+{% block title %}home{% endblock %}
+
+
+{% block content %}
+<div class="col-9 bg-light p-4">
+    <header class="bg-light text-black text-center py-5">
+        <div class="container">
+            <h1 class="display-4">Главная</h1>
+            <p class="lead">Вы находитесь на сайте, предназначенном для продажи товаров</p>
+        </div>
+    </header>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for product in products %}
+            {% include 'catalog/includes/inc_product_card.html' %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

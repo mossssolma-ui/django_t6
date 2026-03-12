@@ -1,10 +1,7 @@
 from django.http import HttpResponse, HttpRequest
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
-
-def home(request: HttpRequest) -> HttpResponse:
-    """Функция рендерит главную html-страницу"""
-    return render(request, "catalog/home.html")
+from catalog.models import Product
 
 
 def contacts(request: HttpRequest) -> HttpResponse:
@@ -17,3 +14,18 @@ def contacts(request: HttpRequest) -> HttpResponse:
             f"Спасибо, {name}! Сообщение длиной = {len(message)} знаков получено. Ответ пришлем на эту почту {email}"
         )
     return render(request, "catalog/contacts.html")
+
+
+def products_list(request: HttpRequest) -> HttpResponse:
+    """ Функция вывода продукта """
+    products = Product.objects.all()
+    context = {"products": products}
+    return render(request, "catalog/products_list.html", context=context)
+
+
+def product_details(request: HttpRequest, product_id: int) -> HttpResponse:
+    """ Функция будет возращать подробную информацию о продукте """
+    product = get_object_or_404(Product, id=product_id)
+    context = {"product": product}
+
+    return render(request, "catalog/product_details.html", context=context)
