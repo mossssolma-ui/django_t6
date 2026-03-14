@@ -42,9 +42,19 @@ django-6/
 │ │
 │ ├── templates/ # HTML шаблоны
 │ │ └── catalog/
-│ │     ├── home.html # Главная страница
+│ │     ├── base.html # базовый шаблон
+│ │     ├── products_list.html # главная страница с продуктами
+│ │     ├── products_details.html # подробное описание продукта
+│ │     ├── product_add.html # добавление нового продукта
 │ │     └── contacts.html # Страница контактов
+│ │     └── includes/  # подшаблоны
+│ │         ├── inc_menu.html # подшаблон меню 
+│ │         ├── inc_contacts_form.html # подшаблон формы для обратной связи 
+│ │         └── inc_product_card.html # подшаблон карточки товара 
 │ │
+│ ├── templatetags
+│ │ └── my_tags.py # фильтр шаблонов
+│ 
 │ ├── __init__.py
 │ ├── admin.py
 │ ├── apps.py # конфиг приложения
