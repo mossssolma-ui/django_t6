@@ -5,8 +5,8 @@ from . import views
 app_name = CatalogConfig.name
 
 urlpatterns = [
-    path("", views.products_list, name="products_list"),
-    path("contacts/", views.contacts, name="contacts"),
-    path("product_details/<int:product_id>", views.product_details, name="product_details"),
-    path("product_add", views.product_add, name="product_add"),
+    path("", views.ProductListView.as_view(), name="products_list"),
+    path("contacts/", views.ContactsView.as_view(), name="contacts"),
+    path("product_details/<int:pk>/", views.ProductDetailView.as_view(), name="product_details"),
+    path("product_add/", views.ProductCreateView.as_view(), name="product_add"),
 ]

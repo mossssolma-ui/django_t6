@@ -1,0 +1,20 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Главная - Спортивный блог{% endblock %}
+
+{% block content %}
+<main>
+    <div class="container my-5">
+        <!-- Заголовок -->
+        {% include 'blog/header.html' %}
+
+        <!-- Сетка постов -->
+        <div class="row g-4">
+            {% for post in posts %}
+                {% include 'blog/includes/inc_post.html' %}
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock %}
