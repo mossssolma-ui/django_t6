@@ -26,6 +26,8 @@
                         <p class="card-text">Обновлено: {{ product.updated_at|date:"d.m.Y" }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
+                                <a class="btn btn-secondary" href="{% url 'catalog:product_update' product.pk%}" role="button">Редактировать</a>
+                                <a class="btn btn-danger" href="{% url 'catalog:product_delete' product.pk%}" role="button">Удалить</a>
                                 <a class="btn btn-primary" href="{% url 'catalog:products_list' %}" role="button">Назад</a>
                             </div>
                             <small class="text-body-secondary">ID: {{ product.id }}</small>
