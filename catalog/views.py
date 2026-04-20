@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
 
-from catalog.forms import ProductForm
+from catalog.forms import ProductForm, CategoryForm
 from catalog.models import Product, Category
 
 
@@ -58,6 +58,48 @@ class ProductDeleteView(DeleteView):
     model = Product
     template_name = "catalog/product_delete.html"
     success_url = reverse_lazy("catalog:products_list")
+
+
+class CategoryListView(ListView):
+    """Класс для отображения списка категории"""
+
+    model = Category
+    template_name = "catalog/category_list.html"
+    context_object_name = "categories"
+
+
+class CategoryDetailView(DetailView):
+    """Класс для отображения данных категории"""
+
+    model = Category
+    template_name = "catalog/category_details.html"
+    context_object_name = "category"
+
+
+class CategoryCreateView(CreateView):
+    """Класс для создания новой категории"""
+
+    model = Category
+    form_class = CategoryForm
+    template_name = "catalog/category_form.html"
+    success_url = reverse_lazy("catalog:category_list")
+
+
+class CategoryUpdateView(UpdateView):
+    """Класс для изменения категории"""
+
+    model = Category
+    form_class = CategoryForm
+    template_name = "catalog/category_form.html"
+    success_url = reverse_lazy("catalog:category_list")
+
+
+class CategoryDeleteView(DeleteView):
+    """Класс для удаления категории"""
+
+    model = Category
+    template_name = "catalog/category_delete.html"
+    success_url = reverse_lazy("catalog:category_list")
 
 
 class ContactsView(TemplateView):

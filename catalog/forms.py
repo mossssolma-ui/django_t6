@@ -59,3 +59,31 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
             raise forms.ValidationError(f"Максимальный размер изображения не должен превышать 5мб")
 
         return image
+
+
+class CategoryForm(StyleFormMixin, forms.ModelForm):
+    excluded_words = ["казино", "криптовалюта", "крипта", "биржа", "дешево", "бесплатно", "обман", "полиция", "радар"]
+
+    class Meta:
+        model = Category
+        fields = ["name", "descriptions"]
+
+    def clean_name(self):
+        name = self.cleaned_data.get("name")
+        name_lower = name.lower()
+
+        for word in self.excluded_words:
+            if word in name_lower:
+                raise forms.ValidationError(f"Название категории содержит запрещенное слово {word}")
+
+        return name
+
+    def clean_descriptions(self):
+        descriptions = self.cleaned_data.get("descriptions")
+        descriptions_lower = descriptions.lower()
+
+        for word in self.excluded_words:
+            if word in descriptions_lower:
+                raise forms.ValidationError(f"Описание содержит запрещенное слово {word}")
+
+        return descriptions

@@ -23,7 +23,7 @@
                 </li>
                 <!-- Категории -->
                 <li>
-                    <a href="#" class="text-white d-block py-3 px-3 text-decoration-none">
+                    <a href="{% url 'catalog:category_list' %}" class="text-white d-block py-3 px-3 text-decoration-none">
                         <img src="{% static 'images/bootstrap-icons-1.13.1/speedometer2.svg' %}"
                              width="24" height="24"
                              class="align-middle me-2"
@@ -62,6 +62,16 @@
                              style="filter: brightness(0) invert(1);"
                              alt="Добавить">
                         <span class="align-middle">Добавить товар</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'catalog:category_add' %}" class="text-white d-block py-3 px-3 text-decoration-none">
+                        <img src="{% static 'images/bootstrap-icons-1.13.1/plus-circle.svg' %}"
+                             width="24" height="24"
+                             class="align-middle me-2"
+                             style="filter: brightness(0) invert(1);"
+                             alt="Добавить">
+                        <span class="align-middle">Добавить категорию</span>
                     </a>
                 </li>
             </ul>
