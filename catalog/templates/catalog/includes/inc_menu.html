@@ -77,24 +77,6 @@
             </ul>
         </div>
         <!-- футер  -->
-        <div class="card-footer text-bg-dark p-3 mt-auto">
-            <div class="d-flex align-items-center">
-                <img src="{% static 'images/face.png' %}" class="rounded-circle z-depth-0 me-2" alt="avatar image"
-                     height="35" width="35">
-                <div class="dropup">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Пользователь
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Профиль</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Выйти</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        {% include 'catalog/includes/inc_user_for_menu.html' %}
     </div>
 </div>

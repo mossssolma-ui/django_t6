@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
@@ -14,7 +15,7 @@ class ProductListView(ListView):
     context_object_name = "products"
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     """Класс для отображения данных конкретного продукта"""
 
     model = Product
@@ -22,7 +23,7 @@ class ProductDetailView(DetailView):
     context_object_name = "product"
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     """Класс для создания нового продукта"""
 
     model = Product
@@ -37,7 +38,7 @@ class ProductCreateView(CreateView):
         return context
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     """Класс для изменения продукта"""
 
     model = Product
@@ -52,7 +53,7 @@ class ProductUpdateView(UpdateView):
         return context
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     """Класс для удаления продукта"""
 
     model = Product
@@ -60,7 +61,7 @@ class ProductDeleteView(DeleteView):
     success_url = reverse_lazy("catalog:products_list")
 
 
-class CategoryListView(ListView):
+class CategoryListView(LoginRequiredMixin, ListView):
     """Класс для отображения списка категории"""
 
     model = Category
@@ -68,7 +69,7 @@ class CategoryListView(ListView):
     context_object_name = "categories"
 
 
-class CategoryDetailView(DetailView):
+class CategoryDetailView(LoginRequiredMixin, DetailView):
     """Класс для отображения данных категории"""
 
     model = Category
@@ -76,7 +77,7 @@ class CategoryDetailView(DetailView):
     context_object_name = "category"
 
 
-class CategoryCreateView(CreateView):
+class CategoryCreateView(LoginRequiredMixin, CreateView):
     """Класс для создания новой категории"""
 
     model = Category
@@ -85,7 +86,7 @@ class CategoryCreateView(CreateView):
     success_url = reverse_lazy("catalog:category_list")
 
 
-class CategoryUpdateView(UpdateView):
+class CategoryUpdateView(LoginRequiredMixin, UpdateView):
     """Класс для изменения категории"""
 
     model = Category
@@ -94,7 +95,7 @@ class CategoryUpdateView(UpdateView):
     success_url = reverse_lazy("catalog:category_list")
 
 
-class CategoryDeleteView(DeleteView):
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     """Класс для удаления категории"""
 
     model = Category
@@ -102,7 +103,7 @@ class CategoryDeleteView(DeleteView):
     success_url = reverse_lazy("catalog:category_list")
 
 
-class ContactsView(TemplateView):
+class ContactsView(LoginRequiredMixin, TemplateView):
     """Класс для отображения контактов и обработки формы"""
 
     template_name = "catalog/contacts.html"
