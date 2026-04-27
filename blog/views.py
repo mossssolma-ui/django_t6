@@ -1,10 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from blog.models import BlogPost
 
 
-class BlogPostListView(ListView):
+class BlogPostListView(LoginRequiredMixin, ListView):
     """Класс для отображения списка постов"""
 
     model = BlogPost
@@ -17,7 +18,7 @@ class BlogPostListView(ListView):
         return queryset
 
 
-class BlogPostDetailView(DetailView):
+class BlogPostDetailView(LoginRequiredMixin, DetailView):
     """Класс для отображения данных конкретного поста"""
 
     model = BlogPost
@@ -32,7 +33,7 @@ class BlogPostDetailView(DetailView):
         return obj
 
 
-class BlogPostCreateView(CreateView):
+class BlogPostCreateView(LoginRequiredMixin, CreateView):
     """Класс для создания поста"""
 
     model = BlogPost
@@ -42,7 +43,7 @@ class BlogPostCreateView(CreateView):
     context_object_name = "post"
 
 
-class BlogPostUpdateView(UpdateView):
+class BlogPostUpdateView(LoginRequiredMixin, UpdateView):
     """Класс для изменения поста"""
 
     model = BlogPost
@@ -55,7 +56,7 @@ class BlogPostUpdateView(UpdateView):
         return reverse_lazy("blog:post_details", kwargs={"pk": self.object.pk})
 
 
-class BlogPostDeleteView(DeleteView):
+class BlogPostDeleteView(LoginRequiredMixin, DeleteView):
     """Класс для удаления поста"""
 
     model = BlogPost

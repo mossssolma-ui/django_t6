@@ -1,0 +1,23 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load my_tags %}
+
+{% block title %}Category{% endblock %}
+
+
+{% block content %}
+<div class="col-9 bg-light p-4">
+    <header class="bg-light text-black text-center py-5">
+        <div class="container">
+            <h1 class="display-4">Категории</h1>
+            <p class="lead">Здесь отображены все категории</p>
+        </div>
+    </header>
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for category in categories %}
+            {% include 'catalog/includes/inc_category_card.html' %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

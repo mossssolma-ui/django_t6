@@ -23,7 +23,7 @@
                 </li>
                 <!-- Категории -->
                 <li>
-                    <a href="#" class="text-white d-block py-3 px-3 text-decoration-none">
+                    <a href="{% url 'catalog:category_list' %}" class="text-white d-block py-3 px-3 text-decoration-none">
                         <img src="{% static 'images/bootstrap-icons-1.13.1/speedometer2.svg' %}"
                              width="24" height="24"
                              class="align-middle me-2"
@@ -64,27 +64,19 @@
                         <span class="align-middle">Добавить товар</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{% url 'catalog:category_add' %}" class="text-white d-block py-3 px-3 text-decoration-none">
+                        <img src="{% static 'images/bootstrap-icons-1.13.1/plus-circle.svg' %}"
+                             width="24" height="24"
+                             class="align-middle me-2"
+                             style="filter: brightness(0) invert(1);"
+                             alt="Добавить">
+                        <span class="align-middle">Добавить категорию</span>
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- футер  -->
-        <div class="card-footer text-bg-dark p-3 mt-auto">
-            <div class="d-flex align-items-center">
-                <img src="{% static 'images/face.png' %}" class="rounded-circle z-depth-0 me-2" alt="avatar image"
-                     height="35" width="35">
-                <div class="dropup">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Пользователь
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Профиль</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Выйти</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        {% include 'catalog/includes/inc_user_for_menu.html' %}
     </div>
 </div>
