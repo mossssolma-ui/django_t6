@@ -1,9 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
-
-from catalog.forms import ProductForm, CategoryForm
+from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView, View
+from django.shortcuts import get_object_or_404, redirect
+from catalog.forms import ProductForm, CategoryForm, ProductModeratorForm
 from catalog.models import Product, Category
 
 
@@ -37,6 +38,11 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         context["categories"] = Category.objects.all()
         return context
 
+    def form_valid(self, form):
+        """ Автоматически назначаем владельца продукта"""
+        form.instance.owner = self.request.user
+        return super().form_valid(form)
+
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     """Класс для изменения продукта"""
@@ -46,11 +52,40 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "catalog/product_form.html"
     success_url = reverse_lazy("catalog:products_list")
 
+    def post(self, request, *args, **kwargs):
+        """Ручная обработка POST запроса с чекбоксом"""
+        self.object = self.get_object()
+
+        name = request.POST.get('name')
+        descriptions = request.POST.get('descriptions')
+        price = request.POST.get('price')
+        category_id = request.POST.get('category')
+
+        is_published = request.POST.get('is_published') == 'on'
+
+        self.object.name = name
+        self.object.descriptions = descriptions
+        self.object.price = price
+        self.object.category_id = category_id
+        self.object.is_published = is_published
+        self.object.save()
+
+        return redirect(self.success_url)
+
     def get_context_data(self, **kwargs):
         """для добавления всех категорий в контекст"""
         context = super().get_context_data(**kwargs)
         context["categories"] = Category.objects.all()
         return context
+
+    def get_form_class(self):
+        """ Показ пользователю формы в зависимости от доступа """
+        user = self.request.user
+        if user == self.object.owner:
+            return ProductForm
+        if user.has_perm("catalog.can_unpublish_product"):
+            return ProductModeratorForm
+        raise PermissionDenied
 
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
@@ -59,6 +94,14 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = "catalog/product_delete.html"
     success_url = reverse_lazy("catalog:products_list")
+
+    def dispatch(self, request, *args, **kwargs):
+        product = self.get_object()
+        user = request.user
+
+        if user == product.owner or user.has_perm("catalog.delete_product"):
+            return super().dispatch(request, *args, **kwargs)
+        raise PermissionDenied("У вас нет прав на удаление продукта")
 
 
 class CategoryListView(LoginRequiredMixin, ListView):
