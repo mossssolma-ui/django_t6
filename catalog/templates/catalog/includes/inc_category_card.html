@@ -9,6 +9,9 @@
             <a class="btn btn-primary w-100"
                href="{% url 'catalog:category_details' category.id %}"
                role="button">Подробнее</a>
+            <a class="btn btn-outline-primary"
+               href="{% url 'catalog:products_category' category.id %}"
+               role="button">Продукты категории</a>
         </div>
     </div>
 </div>

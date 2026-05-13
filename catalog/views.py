@@ -1,11 +1,14 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.cache import cache
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponse
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView, View
-from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import ListView, DetailView, CreateView, TemplateView, UpdateView, DeleteView
+
 from catalog.forms import ProductForm, CategoryForm, ProductModeratorForm
 from catalog.models import Product, Category
+from .services import ProductService
 
 
 class ProductListView(ListView):
@@ -14,6 +17,17 @@ class ProductListView(ListView):
     model = Product
     template_name = "catalog/products_list.html"
     context_object_name = "products"
+
+    def get_queryset(self):
+        """
+        Получает данные по продуктам из кэша,
+        если кэш пуст, получает данные из БД
+        """
+        queryset = cache.get("products_list_queryset")
+        if not queryset:
+            queryset = super().get_queryset()
+            cache.set("products_list_queryset", queryset, 60 * 15)
+        return queryset
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
@@ -102,6 +116,22 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
         if user == product.owner or user.has_perm("catalog.delete_product"):
             return super().dispatch(request, *args, **kwargs)
         raise PermissionDenied("У вас нет прав на удаление продукта")
+
+
+class ProductCategoryView(LoginRequiredMixin, ListView):
+    """Класс для отображения продуктов определенной категории"""
+    template_name = "catalog/products_category.html"
+    context_object_name = "products"
+
+    def get_queryset(self):
+        category_id = self.kwargs.get('pk')
+        return ProductService.get_products(category_id)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_id = self.kwargs.get('pk')
+        context['category_name'] = ProductService.get_category_name(category_id)
+        return context
 
 
 class CategoryListView(LoginRequiredMixin, ListView):
