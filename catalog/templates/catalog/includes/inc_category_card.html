@@ -1,0 +1,17 @@
+{% load my_tags %}
+<div class="col">
+    <div class="card h-100">
+        <div class="card-header text-center bg-secondary text-white">
+            {{ category.name }}
+        </div>
+        <div class="card-body">
+            <p class="card-text">{{ category.descriptions|truncatechars:50 }}</p>
+            <a class="btn btn-primary w-100"
+               href="{% url 'catalog:category_details' category.id %}"
+               role="button">Подробнее</a>
+            <a class="btn btn-outline-primary"
+               href="{% url 'catalog:products_category' category.id %}"
+               role="button">Продукты категории</a>
+        </div>
+    </div>
+</div>

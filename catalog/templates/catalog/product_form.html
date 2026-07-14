@@ -1,0 +1,47 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}{% if object %}Редактирование{% else %}Создание{% endif %} продукта{% endblock %}
+
+
+{% block content %}
+<div class="col-9 bg-light p-4">
+    <div class="container">
+        <header class="bg-light text-black text-center py-5">
+            <h1 class="display-4">Добавить новый продукт</h1>
+        </header>
+
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <form method="post" enctype="multipart/form-data" class="border p-4 rounded">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {{ form.as_p }}
+                    <div class="mb-3 form-check form-switch">
+                        <input type="checkbox"
+                               name="is_published"
+                               id="is_published"
+                               class="form-check-input"
+                               {% if product.is_published %}checked{% endif %}
+                               value="on">
+                        <label class="form-check-label" for="is_published">
+                            Опубликовать продукт
+                        </label>
+                        <small class="form-text text-muted d-block">
+                            Отметьте, чтобы продукт был виден всем пользователям
+                        </small>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="bi bi-check-lg me-2"></i>
+                            {% if object %}Сохранить изменения{% else %}Создать новый продукт{% endif %}
+                        </button>
+                        <a href="{% url 'catalog:products_list' %}" class="btn btn-secondary">Отмена</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

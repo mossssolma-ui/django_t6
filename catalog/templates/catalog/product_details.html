@@ -1,0 +1,66 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load my_tags %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+
+{% block content %}
+<div class="col-9 bg-light p-4">
+    <header class="bg-light text-black text-center py-5">
+        <div class="container">
+            <h1 class="display-4">{{ product.name }}</h1>
+        </div>
+    </header>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col">
+            <div class="card">
+                <img src="{{ product.image | media_filter }}" class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                    <p class="card-text">Название: {{ product.name }}</p>
+                    <p class="card-text">Описание: {{ product.descriptions|truncatechars:100 }}</p>
+                    <p class="card-text">Цена: {{ product.price }}</p>
+                    <p class="card-text">Категория: {{ product.category.name }}</p>
+                    <p class="card-text">Дата создания: {{ product.created_at|date:"d.m.Y" }}</p>
+                    <p class="card-text">Обновлено: {{ product.updated_at|date:"d.m.Y" }}</p>
+                    <p class="card-text"><strong>Владелец:</strong> {{ product.owner.email }}</p>
+                    <p class="card-text">
+                        <strong>Статус:</strong>
+                        {% if product.is_published %}
+                        <span class="badge bg-success">Опубликован</span>
+                        {% else %}
+                        <span class="badge bg-secondary">Не опубликован</span>
+                        {% endif %}
+                    </p>
+                    <p class="card-text"><strong>Дата создания:</strong> {{ product.created_at|date:"d.m.Y" }}</p>
+                    <p class="card-text"><strong>Обновлено:</strong> {{ product.updated_at|date:"d.m.Y" }}</p>
+
+                    <div class="d-flex justify-content-between align-items-center mt-3">
+                        <div>
+                            {% if user == product.owner %}
+                            <a class="btn btn-warning" href="{% url 'catalog:product_update' product.pk %}"
+                               role="button">
+                                Редактировать
+                            </a>
+                            {% endif %}
+
+                            {% if user == product.owner or perms.catalog.delete_product %}
+                            <a class="btn btn-danger" href="{% url 'catalog:product_delete' product.pk %}">
+                                Удалить
+                            </a>
+                            {% endif %}
+
+                            <a class="btn btn-primary" href="{% url 'catalog:products_list' %}" role="button">
+                                Назад
+                            </a>
+                        </div>
+                        <small class="text-body-secondary">ID: {{ product.id }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}Редактирование профиля{% endblock %}
+
+{% block content %}
+<div class="col-9 bg-light p-4">
+    <div class="container">
+        <header class="bg-light text-black text-center py-5">
+            <h1 class="display-4">Редактирование профиля</h1>
+            <p class="lead">Измените свои данные</p>
+        </header>
+
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <form method="post" enctype="multipart/form-data" class="border p-4 rounded">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {{ user.email }}
+                    {% for field in form %}
+                    <div class="mb-3">
+                        <label class="form-label">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                    {% endfor %}
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-success flex-grow-1">
+                            <i class="bi bi-save me-2"></i>Сохранить изменения
+                        </button>
+                        <a class="btn btn-secondary flex-grow-1" href="{% url 'users:profile_user' %}">
+                            Отмена
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

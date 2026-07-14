@@ -1,0 +1,82 @@
+{% load static %}
+<div class="col-3">
+    <div class="card rounded-0 border-0 d-flex flex-column h-100">
+        <div class="card-header text-bg-dark py-3">
+            <img src="{% static 'images/bootstrap_logo.png' %}" alt="Logo" width="32"
+                 class="img-thumbnail align-middle me-2">
+            <span class="align-middle"><h5 class="mb-0 d-inline">Меню</h5></span>
+        </div>
+
+        <div class="card-body text-bg-dark p-0 flex-grow-1">
+            <ul class="list-unstyled mb-0">
+                <!-- Главная -->
+                <li>
+                    <a href="{% url 'catalog:products_list' %}"
+                       class="text-white d-block py-3 px-3 text-decoration-none">
+                        <img src="{% static 'images/bootstrap-icons-1.13.1/house-door-fill.svg' %}"
+                             width="24" height="24"
+                             class="align-middle me-2"
+                             style="filter: brightness(0) invert(1);"
+                             alt="Главная">
+                        <span class="align-middle">Главная</span>
+                    </a>
+                </li>
+                <!-- Категории -->
+                <li>
+                    <a href="{% url 'catalog:category_list' %}" class="text-white d-block py-3 px-3 text-decoration-none">
+                        <img src="{% static 'images/bootstrap-icons-1.13.1/speedometer2.svg' %}"
+                             width="24" height="24"
+                             class="align-middle me-2"
+                             style="filter: brightness(0) invert(1);"
+                             alt="Категории">
+                        <span class="align-middle">Категории</span>
+                    </a>
+                </li>
+                <!-- Заказы -->
+                <li>
+                    <a href="#" class="text-white d-block py-3 px-3 text-decoration-none">
+                        <img src="{% static 'images/bootstrap-icons-1.13.1/calendar-check.svg' %}"
+                             width="24" height="24"
+                             class="align-middle me-2"
+                             style="filter: brightness(0) invert(1);"
+                             alt="Заказы">
+                        <span class="align-middle">Заказы</span>
+                    </a>
+                </li>
+                <!-- Контакты -->
+                <li>
+                    <a href="{% url 'catalog:contacts' %}" class="text-white d-block py-3 px-3 text-decoration-none">
+                        <img src="{% static 'images/bootstrap-icons-1.13.1/person-circle.svg' %}"
+                             width="24" height="24"
+                             class="align-middle me-2"
+                             style="filter: brightness(0) invert(1);"
+                             alt="Контакты">
+                        <span class="align-middle">Контакты</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'catalog:product_add' %}" class="text-white d-block py-3 px-3 text-decoration-none">
+                        <img src="{% static 'images/bootstrap-icons-1.13.1/plus-circle.svg' %}"
+                             width="24" height="24"
+                             class="align-middle me-2"
+                             style="filter: brightness(0) invert(1);"
+                             alt="Добавить">
+                        <span class="align-middle">Добавить товар</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'catalog:category_add' %}" class="text-white d-block py-3 px-3 text-decoration-none">
+                        <img src="{% static 'images/bootstrap-icons-1.13.1/plus-circle.svg' %}"
+                             width="24" height="24"
+                             class="align-middle me-2"
+                             style="filter: brightness(0) invert(1);"
+                             alt="Добавить">
+                        <span class="align-middle">Добавить категорию</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- футер  -->
+        {% include 'catalog/includes/inc_user_for_menu.html' %}
+    </div>
+</div>

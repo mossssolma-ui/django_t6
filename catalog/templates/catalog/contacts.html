@@ -1,0 +1,36 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+{% load my_tags %}
+
+{% block title %}Contacts{% endblock %}
+
+
+{% block content %}
+<div class="col-9 bg-light p-4">
+        <header class="bg-light text-black text-center py-5">
+            <div class="container">
+                <h1 class="display-4">Контакты</h1>
+            </div>
+        </header>
+
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-5">
+                <!-- форма-->
+                {% include 'catalog/includes/inc_contacts_form.html' %}
+            </div>
+            <!-- контактная инфа -->
+            <div class="col-5">
+                <div class="ps-4">
+                    <h5 class="mb-4">Наши контакты</h5>
+                    <p class="text-secondary">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% load static %}
