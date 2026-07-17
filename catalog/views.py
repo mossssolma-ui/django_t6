@@ -53,7 +53,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         return context
 
     def form_valid(self, form):
-        """ Автоматически назначаем владельца продукта"""
+        """Автоматически назначаем владельца продукта"""
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
@@ -70,12 +70,12 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         """Ручная обработка POST запроса с чекбоксом"""
         self.object = self.get_object()
 
-        name = request.POST.get('name')
-        descriptions = request.POST.get('descriptions')
-        price = request.POST.get('price')
-        category_id = request.POST.get('category')
+        name = request.POST.get("name")
+        descriptions = request.POST.get("descriptions")
+        price = request.POST.get("price")
+        category_id = request.POST.get("category")
 
-        is_published = request.POST.get('is_published') == 'on'
+        is_published = request.POST.get("is_published") == "on"
 
         self.object.name = name
         self.object.descriptions = descriptions
@@ -93,7 +93,7 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
     def get_form_class(self):
-        """ Показ пользователю формы в зависимости от доступа """
+        """Показ пользователю формы в зависимости от доступа"""
         user = self.request.user
         if user == self.object.owner:
             return ProductForm
@@ -120,17 +120,18 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
 
 class ProductCategoryView(LoginRequiredMixin, ListView):
     """Класс для отображения продуктов определенной категории"""
+
     template_name = "catalog/products_category.html"
     context_object_name = "products"
 
     def get_queryset(self):
-        category_id = self.kwargs.get('pk')
+        category_id = self.kwargs.get("pk")
         return ProductService.get_products(category_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        category_id = self.kwargs.get('pk')
-        context['category_name'] = ProductService.get_category_name(category_id)
+        category_id = self.kwargs.get("pk")
+        context["category_name"] = ProductService.get_category_name(category_id)
         return context
 
 

@@ -1,7 +1,7 @@
 import os
+import sys
 from pathlib import Path
 
-from django.conf.global_settings import CSRF_TRUSTED_ORIGINS
 from dotenv import load_dotenv
 
 load_dotenv(override=True)
@@ -106,27 +106,36 @@ LOGIN_URL = "users:login"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.yandex.ru"
 EMAIL_PORT = 465
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 CACHE_ENABLED = True if os.getenv("CACHE_ENABLED") == "True" else False
 if CACHE_ENABLED:
     CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-            'LOCATION': f'redis://{os.getenv("REDIS_HOST", "127.0.0.1")}:{os.getenv("REDIS_PORT", "6379")}/{os.getenv("REDIS_DB", "1")}',
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": f'redis://{os.getenv("REDIS_HOST", "127.0.0.1")}:{os.getenv("REDIS_PORT", "6379")}/'
+            f'{os.getenv("REDIS_DB", "1")}',
         }
     }
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://158.160.175.38",
-    "https://158.160.175.38",
+    "http://130.193.57.159",
+    "https://130.193.57.159",
     "http://localhost",
     "http://127.0.0.1",
 ]
+
+if "test" in sys.argv:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
+    }

@@ -56,7 +56,7 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
 
         max_size = 5 * 1024 * 1024
         if image.size > max_size:
-            raise forms.ValidationError(f"Максимальный размер изображения не должен превышать 5мб")
+            raise forms.ValidationError("Максимальный размер изображения не должен превышать 5мб")
 
         return image
 
@@ -107,7 +107,7 @@ class ProductModeratorForm(StyleFormMixin, forms.ModelForm):
 
         max_size = 5 * 1024 * 1024
         if image.size > max_size:
-            raise forms.ValidationError(f"Максимальный размер изображения не должен превышать 5мб")
+            raise forms.ValidationError("Максимальный размер изображения не должен превышать 5мб")
 
         return image
 

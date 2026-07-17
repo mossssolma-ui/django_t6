@@ -26,7 +26,7 @@ class Product(models.Model):
     updated_at = models.DateField(auto_now=True, verbose_name="Дата последнего изменения")
 
     is_published = models.BooleanField(verbose_name="Опубликовано", default=False, help_text="Отметьте для публикации")
-    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='owners', verbose_name="Владелец")
+    owner = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name="owners", verbose_name="Владелец")
 
     def __str__(self):
         return self.name
@@ -37,5 +37,5 @@ class Product(models.Model):
         ordering = ["created_at"]
 
         permissions = [
-            ('can_unpublish_product', 'Может отменять публикацию продукта'),
+            ("can_unpublish_product", "Может отменять публикацию продукта"),
         ]
